@@ -27,10 +27,10 @@ jobs:
               awscli==1.11.76
       - run:
           name: Build Docker images
-          command: docker-compose -f docker-compose.yml build
+          command: docker-compose build
       - run:
           name: Spin up Docker containers
-          command: docker-compose -f docker-compose.yml up -d
+          command: docker-compose up -d
       - run:
           name: Test the api
-          command: docker-compose -f docker-compose.yml run api npm test
+          command: docker-compose run api npm test
