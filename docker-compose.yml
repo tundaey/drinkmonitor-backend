@@ -19,7 +19,6 @@ services:
     volumes:
       - './src/server:/src/server'
       - './test:/src/test'
-      - './package.json:/src/package.json'
     ports:
       - '3000:3000'
     environment:
