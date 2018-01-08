@@ -4,7 +4,6 @@ jobs:
   build:
     docker:
       - image: docker:17.03.2-ce-git
-    working_directory: ~/drinkmonitor-api
     environment:
       - NODE_ENV: test
     parallelism: 1
