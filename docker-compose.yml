@@ -1,0 +1,34 @@
+version: '2.1'
+
+services:
+
+  db:
+    container_name: db
+    build: ./src/db
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+    healthcheck:
+      test: exit 0
+
+  api:
+    container_name: api
+    build: .
+    volumes:
+      - './src/server:/src/server'
+      - './test:/src/test'
+      - './package.json:/src/package.json'
+    ports:
+      - '3000:3000'
+    environment:
+      - DATABASE_URL=postgres://admin:admin@db:5432/drinkmonitor_dev
+      - DATABASE_TEST_URL=postgres://admin:admin@db:5432/drinkmonitor_test
+      - NODE_ENV=${NODE_ENV}
+      - TOKEN_SECRET=changeme
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db
