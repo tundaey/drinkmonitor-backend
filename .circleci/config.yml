@@ -32,3 +32,6 @@ jobs:
       - run:
           name: Test the api
           command: docker-compose -f docker-compose-review.yml run api npm test
+      - run:
+          name: Deploy
+          command: ssh -v $DROPLET_USER@$DROPLET_IP "cd ~/drinkmonitor-api; ./circle_deployer.sh"
