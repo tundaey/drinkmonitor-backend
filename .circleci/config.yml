@@ -27,17 +27,11 @@ jobs:
           name: Dockerhub Login
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run:
-          name: Push Image to Dockerhub
-          command: docker-compose -f docker-compose-review.yml push
-      - run:
-          name: Pull Images
-          command: docker-compose -f docker-compose-review.yml pull
-      - run:
           name: Spin up Docker containers
           command: docker-compose -f docker-compose-review.yml up --build -d
       - run:
           name: Test the api
-          command: docker-compose -f docker-compose-review.yml run api npm test
+          command: docker-compose -f docker-compose-review.yml run prod_api npm test
     deployment:
       latest:
         branch: master
