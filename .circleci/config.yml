@@ -32,10 +32,9 @@ jobs:
       - run:
           name: Test the api
           command: docker-compose -f docker-compose-review.yml run prod_api npm test
-    deployment:
-      latest:
-        branch: master
-        commands:
-          - docker login -u $DOCKER_USER -p $DOCKER_PASS
-          - docker-compose -f docker-compose-review.yml push
-          - deploy.sh
+      - run:
+          name: Push to Registry
+          command: docker-compose -f docker-compose-review.yml push
+      - run:
+          name: Deploy
+          command: deploy.sh
