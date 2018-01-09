@@ -25,6 +25,7 @@ jobs:
               awscli==1.11.76
       - run:
           name: Build Docker images
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
           command: docker-compose -f docker-compose-review.yml push
           command: docker-compose -f docker-compose-review.yml pull
       - run:
