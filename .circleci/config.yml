@@ -25,13 +25,18 @@ jobs:
               awscli==1.11.76
       - run:
           name: Build Docker images
-          command: docker-compose -f docker-compose-review.yml build
+          command: docker-compose -f docker-compose-review.yml push
+          command: docker-compose -f docker-compose-review.yml pull
       - run:
           name: Spin up Docker containers
           command: docker-compose -f docker-compose-review.yml up -d
       - run:
           name: Test the api
           command: docker-compose -f docker-compose-review.yml run api npm test
-      - run:
-          name: Deploy
-          command: ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "docker-compose run api npm start"
+      deployment:
+        latest:
+          branch: master
+          commands:
+            - docker login -u $DOCKER_USER -p $DOCKER_PASS
+            - docker-compose -f docker-compose-review.yml push
+            - deploy.sh

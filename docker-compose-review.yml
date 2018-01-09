@@ -5,6 +5,7 @@ services:
   db:
     container_name: db
     build: ./src/db
+    image: tundaey/drinkmonitorapi_db:latest
     ports:
       - '5433:5432'
     environment:
@@ -16,6 +17,7 @@ services:
   api:
     container_name: api
     build: .
+    image: tundaey/drinkmonitorapi_api
     ports:
       - '3000:3000'
     environment:
