@@ -34,7 +34,7 @@ jobs:
           command: docker-compose -f docker-compose-review.yml pull
       - run:
           name: Spin up Docker containers
-          command: docker-compose -f docker-compose-review.yml up -d
+          command: docker-compose -f docker-compose-review.yml up --build -d
       - run:
           name: Test the api
           command: docker-compose -f docker-compose-review.yml run api npm test
