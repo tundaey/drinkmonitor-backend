@@ -37,4 +37,4 @@ jobs:
           command: docker-compose -f docker-compose-review.yml push
       - deploy:
           name: Deploy
-          command: ssh $SSH_USERNAME@$DROPLET_IP -o StrictHostKeyChecking=no "cd drinkmonitor-api;git pull;docker-compose -f docker-compose-review.yml pull; docker-compose -f docker-compose-review.yml up -d;"
+          command: ssh $SSH_USERNAME@$DROPLET_IP -o StrictHostKeyChecking=no "cd drinkmonitor-api;git pull;docker-compose -f docker-compose-review.yml pull; docker-compose -f docker-compose-review.yml up --build -d;"
