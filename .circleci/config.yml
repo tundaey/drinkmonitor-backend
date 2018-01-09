@@ -24,9 +24,13 @@ jobs:
               docker-compose==1.12.0 \
               awscli==1.11.76
       - run:
-          name: Build Docker images
+          name: Dockerhub Login
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run:
+          name: Push Image to Dockerhub
           command: docker-compose -f docker-compose-review.yml push
+      - run:
+          name: Pull Images
           command: docker-compose -f docker-compose-review.yml pull
       - run:
           name: Spin up Docker containers
