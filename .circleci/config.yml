@@ -35,6 +35,6 @@ jobs:
       - run:
           name: Push to Registry
           command: docker-compose -f docker-compose-review.yml push
-      - run:
+      - deploy:
           name: Deploy
-          command: deploy.sh
+          command: ssh $SSH_USERNAME@$DROPLET_IP -o StrictHostKeyChecking=no "docker-compose -f docker-compose-review.yml pull; docker-compose -f docker-compose.review.yml up --build -d;"
