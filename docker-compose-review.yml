@@ -19,7 +19,7 @@ services:
     build: .
     image: tundaey/drinkmonitorapi_prod_api
     ports:
-      - '80:80'
+      - '3000:3000'
     environment:
       - DATABASE_URL=postgres://admin:admin@prod_db:5432/drinkmonitor_dev
       - DATABASE_TEST_URL=postgres://admin:admin@prod_db:5432/drinkmonitor_test
